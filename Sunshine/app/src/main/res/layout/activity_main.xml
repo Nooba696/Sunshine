@@ -9,4 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.genericapp.extnds.sunshine.MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/sunshine_main_weather_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>
