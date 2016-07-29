@@ -15,4 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="true"
+        android:visibility="visible"/>
+
 </RelativeLayout>
