@@ -24,11 +24,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        apiService.forcastQuery("94043").enqueue(object : Callback<Forcast> {
+        apiService.forcastQuery("700064").enqueue(object : Callback<Forcast> {
             override fun onResponse(call: Call<Forcast>, response: Response<Forcast>) {
 
                 progress_bar.visibility = View.GONE
-                sunshine_main_weather_list.adapter=WeatherListAdapter(this@MainActivity,response.body().list!!)
+                sunshine_main_weather_list.adapter=WeatherListAdapter(response.body().list!!)
                 sunshine_main_weather_list.layoutManager = LinearLayoutManager(this@MainActivity)
                 sunshine_main_weather_list.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL_LIST))
             }
