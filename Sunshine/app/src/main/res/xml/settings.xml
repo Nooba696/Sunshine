@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="Location">
+
+        <EditTextPreference
+            android:title="City Name"
+            android:key="location_preference"
+            android:defaultValue="Kolkata"
+            android:inputType="text"
+            android:singleLine="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Temperature">
+
+        <ListPreference
+            android:key="units_preference"
+            android:title="Units"
+            android:defaultValue="metric"
+            android:entries="@array/unit_list_entries"
+            android:entryValues="@array/unit_list_values" />/>
+
+    </PreferenceCategory>
+
+
 </PreferenceScreen>

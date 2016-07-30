@@ -3,11 +3,13 @@ package com.genericapp.extnds.sunshine
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.preference.PreferenceManager
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.genericapp.extnds.mozillarecpro.DividerItemDecoration
 import com.genericapp.extnds.sunshine.Models.Forcast
 import com.genericapp.extnds.sunshine.Settings.SettingsActivity
@@ -38,7 +40,14 @@ class MainActivity : AppCompatActivity() {
         progress_bar.visibility = View.VISIBLE
         sunshine_main_weather_list.adapter=null
 
-        apiService.forcastQuery("Kolkata").enqueue(object : Callback<Forcast> {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val cityName = sharedPrefs.getString("location_preference", "Kolkata")
+        val units = sharedPrefs.getString("units_preference", "metric")
+
+        Log.d(TAG,cityName)
+        Log.d(TAG,units)
+
+        apiService.forcastQuery(cityName, units).enqueue(object : Callback<Forcast> {
             override fun onResponse(call: Call<Forcast>, response: Response<Forcast>) {
 
                 if(response.isSuccessful) {
@@ -54,6 +63,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Forcast>, t: Throwable) {
                 Log.d(TAG,"Fail")
+                progress_bar.visibility = View.GONE
+                Toast.makeText(this@MainActivity,"Couldn't fetch data. Try again",Toast.LENGTH_SHORT).show()
+
             }
         })
     }
