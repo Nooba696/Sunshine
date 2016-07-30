@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("data/2.5/forecast/daily")
-    fun forcastQuery(@Query("zip") zip : String,@Query("units") units : String = "metric",@Query("appid") appid : String = API_KEY): Call<Forcast>
+    fun forcastQuery(@Query("q") cityName : String,@Query("unit") units : String = "metrics",@Query("appid") appid : String = API_KEY): Call<Forcast>
 
 }
 

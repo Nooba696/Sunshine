@@ -6,6 +6,6 @@ package com.genericapp.extnds.sunshine.Models
 
 data class Forcast(val id : Long?)
 {
-    val cnt : String? = null
+    val cnt : Long? = null
     val list : List<ForcastData>? = null
 }

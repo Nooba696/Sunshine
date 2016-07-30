@@ -3,17 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.genericapp.extnds.sunshine.MainActivity">
+
+    <include layout="@layout/action_bar" android:id="@+id/action_bar_layout"/>
 
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/sunshine_main_weather_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/action_bar_layout"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
