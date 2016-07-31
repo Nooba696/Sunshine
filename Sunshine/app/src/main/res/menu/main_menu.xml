@@ -10,4 +10,9 @@
         android:id="@+id/settings"
         android:title="Settings"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/map"
+        android:title="Map"
+        app:showAsAction="never"/>
 </menu>

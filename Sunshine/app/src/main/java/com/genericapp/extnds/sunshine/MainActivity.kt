@@ -1,6 +1,7 @@
 package com.genericapp.extnds.sunshine
 
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.preference.PreferenceManager
@@ -85,6 +86,21 @@ class MainActivity : AppCompatActivity() {
             R.id.settings -> {
 
                 startActivity(Intent(this,SettingsActivity::class.java))
+                return true
+            }
+            R.id.map -> {
+                val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+                val cityName = sharedPrefs.getString("location_preference", "Kolkata")
+                val geoLocation = Uri.parse("geo:0,0?").buildUpon()
+                    .appendQueryParameter("q",cityName)
+                    .build()
+
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = geoLocation
+                if(intent.resolveActivity(packageManager) != null)
+                    startActivity(intent)
+                else
+                    Log.d(TAG,"No app to run Maps")
                 return true
             }
             else -> {
