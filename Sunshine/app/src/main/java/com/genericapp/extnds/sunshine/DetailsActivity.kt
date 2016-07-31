@@ -3,6 +3,8 @@ package com.genericapp.extnds.sunshine
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.widget.ShareActionProvider
 import android.view.Menu
 import android.view.MenuItem
 import com.genericapp.extnds.sunshine.Settings.SettingsActivity
@@ -25,17 +27,23 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.details_menu, menu)
+        val mShareActionProvider = MenuItemCompat.getActionProvider(menu.findItem(R.id.share)) as ShareActionProvider
+        mShareActionProvider.setShareIntent(createShareIntent())
         return true
     }
+
+    private fun createShareIntent(): Intent {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"${day.text} ${weather_type.text} ${temperature.text} #Sunshine")
+        return shareIntent
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId)
         {
-            R.id.settings -> {
-
-                startActivity(Intent(this, SettingsActivity::class.java))
-                return true
-            }
             else -> {
                 return super.onOptionsItemSelected(item)
             }
