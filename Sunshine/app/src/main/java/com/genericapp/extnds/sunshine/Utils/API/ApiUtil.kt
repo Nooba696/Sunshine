@@ -1,6 +1,6 @@
-package com.genericapp.extnds.sunshine.Utils
+package com.genericapp.extnds.sunshine.Utils.API
 
-import com.genericapp.extnds.mozillarecpro.ApiService
+import com.genericapp.extnds.sunshine.Utils.API.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

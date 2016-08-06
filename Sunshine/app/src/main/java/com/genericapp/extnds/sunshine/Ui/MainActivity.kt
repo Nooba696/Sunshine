@@ -1,4 +1,4 @@
-package com.genericapp.extnds.sunshine
+package com.genericapp.extnds.sunshine.Ui
 
 import android.content.Intent
 import android.net.Uri
@@ -12,9 +12,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.genericapp.extnds.mozillarecpro.DividerItemDecoration
-import com.genericapp.extnds.sunshine.Models.Forcast
+import com.genericapp.extnds.sunshine.Models.Retrofit.Forcast
+import com.genericapp.extnds.sunshine.R
 import com.genericapp.extnds.sunshine.Settings.SettingsActivity
-import com.genericapp.extnds.sunshine.Utils.apiService
+import com.genericapp.extnds.sunshine.Utils.API.apiService
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 if(response.isSuccessful) {
                     progress_bar.visibility = View.GONE
                     Log.d(TAG,"${response.body()}")
-                    sunshine_main_weather_list.adapter=WeatherListAdapter(response.body().list!!)
+                    sunshine_main_weather_list.adapter= WeatherListAdapter(response.body().list!!)
                     sunshine_main_weather_list.layoutManager = LinearLayoutManager(this@MainActivity)
                     sunshine_main_weather_list.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL_LIST))
                 }
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Forcast>, t: Throwable) {
                 Log.d(TAG,"Fail")
                 progress_bar.visibility = View.GONE
-                Toast.makeText(this@MainActivity,"Couldn't fetch data. Try again",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity,"Couldn't fetch data. Try again", Toast.LENGTH_SHORT).show()
 
             }
         })
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.settings -> {
 
-                startActivity(Intent(this,SettingsActivity::class.java))
+                startActivity(Intent(this, SettingsActivity::class.java))
                 return true
             }
             R.id.map -> {

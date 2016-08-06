@@ -1,4 +1,4 @@
-package com.genericapp.extnds.sunshine
+package com.genericapp.extnds.sunshine.Ui
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.genericapp.extnds.sunshine.Models.ForcastData
+import com.genericapp.extnds.sunshine.Models.Retrofit.ForcastData
+import com.genericapp.extnds.sunshine.R
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,7 +53,7 @@ class WeatherListAdapter(val forcastDataList : List<ForcastData>) : RecyclerView
                 temperature.text = "${forcastData.temp!!.max!!.toInt()}/${forcastData.temp.min!!.toInt()}"
 
                 setOnClickListener{
-                    val intent = Intent(context,DetailsActivity::class.java)
+                    val intent = Intent(context, DetailsActivity::class.java)
                     intent.putExtra(DAY_TAG,day.text.toString())
                     intent.putExtra(WEATHER_TAG,weather_type.text.toString())
                     intent.putExtra(TEMPERATURE_TAG,temperature.text.toString())

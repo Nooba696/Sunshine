@@ -1,4 +1,4 @@
-package com.genericapp.extnds.sunshine
+package com.genericapp.extnds.sunshine.Ui
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.ShareActionProvider
 import android.view.Menu
 import android.view.MenuItem
+import com.genericapp.extnds.sunshine.R
 import com.genericapp.extnds.sunshine.Settings.SettingsActivity
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.list_item.*
