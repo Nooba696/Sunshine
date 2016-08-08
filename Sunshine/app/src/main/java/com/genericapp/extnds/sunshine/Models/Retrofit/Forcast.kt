@@ -6,6 +6,6 @@ package com.genericapp.extnds.sunshine.Models.Retrofit
 
 data class Forcast(val id : Long?)
 {
-    val cnt : Long? = null
+    val city : Location? = null
     val list : List<ForcastData>? = null
 }

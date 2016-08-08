@@ -13,9 +13,12 @@ import android.view.View
 import android.widget.Toast
 import com.genericapp.extnds.mozillarecpro.DividerItemDecoration
 import com.genericapp.extnds.sunshine.Models.Retrofit.Forcast
+import com.genericapp.extnds.sunshine.Models.SugarORM.Location
 import com.genericapp.extnds.sunshine.R
 import com.genericapp.extnds.sunshine.Settings.SettingsActivity
 import com.genericapp.extnds.sunshine.Utils.API.apiService
+import com.genericapp.extnds.sunshine.Utils.Database.DatabaseService
+import com.orm.SugarRecord
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -55,6 +58,40 @@ class MainActivity : AppCompatActivity() {
                 if(response.isSuccessful) {
                     progress_bar.visibility = View.GONE
                     Log.d(TAG,"${response.body()}")
+
+                    //val dbLoc = Location()
+                    //dbLoc.id = response.body().city?.id
+                    //dbLoc.name = response.body().city?.name
+                    //dbLoc.lat = response.body().city?.coord?.lat
+                    //dbLoc.lon = response.body().city?.coord?.lon
+                    //dbLoc.save()
+
+                    //val dbLoc2 = DatabaseService.addLocation(response.body().city)
+                    //val dbLoc2 = SugarRecord.findById(Location::class.java,response.body().city?.id)
+
+                    //Log.d(TAG,"${dbLoc2.id}")
+                    //Log.d(TAG,"${dbLoc2.name}")
+                    //Log.d(TAG,"${dbLoc2.lat}")
+                    //Log.d(TAG,"${dbLoc2.lon}")
+
+                    DatabaseService.addForcasts(response.body())
+                    val dbLoc2 = SugarRecord.findById(Location::class.java,response.body().city?.id)
+                    val forcasts = dbLoc2.getForcasts()
+                    for (forcast in forcasts){
+
+                        Log.d(TAG,"${forcast.location?.name}")
+                        Log.d(TAG,"${forcast.weatherContdId}")
+                        Log.d(TAG,"${forcast.minTemp}")
+                        Log.d(TAG,"${forcast.windSpeed}")
+                        Log.d(TAG,"${forcast.humidity}")
+                        Log.d(TAG,"${forcast.maxTemp}")
+                        Log.d(TAG,"${forcast.date}")
+                        Log.d(TAG,"${forcast.pressure}")
+                        Log.d(TAG,"-----------------------------------")
+                    }
+
+
+
                     sunshine_main_weather_list.adapter= WeatherListAdapter(response.body().list!!)
                     sunshine_main_weather_list.layoutManager = LinearLayoutManager(this@MainActivity)
                     sunshine_main_weather_list.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL_LIST))
