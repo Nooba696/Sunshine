@@ -1,5 +1,7 @@
 package com.genericapp.extnds.sunshine.Utils.Database
 
+import android.os.AsyncTask
+import android.util.Log
 import com.genericapp.extnds.sunshine.Models.SugarORM.Forcast
 import com.genericapp.extnds.sunshine.Models.SugarORM.Location
 import com.orm.SugarRecord
@@ -9,14 +11,19 @@ import java.util.*
  * Created by Nooba(PratickRoy) on 08-08-2016.
  */
 object DatabaseService{
+
+    const val TAG = "DatabaseService"
     fun addLocation(apiLoc : com.genericapp.extnds.sunshine.Models.Retrofit.Location?) : Location{
+
         val dbLoc = Location()
         with(dbLoc){
             id = apiLoc?.id
             name = apiLoc?.name
             lat = apiLoc?.coord?.lat
             lon = apiLoc?.coord?.lon
-            save()
+            AsyncTask.execute{
+                Log.d(TAG,"Location Data Saved with Id ${save()}")
+            }
         }
         return dbLoc
     }
@@ -38,7 +45,10 @@ object DatabaseService{
                 maxTemp = forcast.temp?.max
                 date = forcast.dt
                 pressure = forcast.pressure
-                save()
+                AsyncTask.execute{
+
+                    Log.d(TAG,"Forcast Data Saved with Id ${save()}")
+                }
             }
             dbForcasts.add(dbForcast)
 

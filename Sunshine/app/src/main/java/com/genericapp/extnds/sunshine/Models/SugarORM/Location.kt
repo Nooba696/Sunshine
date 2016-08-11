@@ -15,5 +15,8 @@ class Location() : SugarRecord() {
     fun getForcasts() : List<Forcast>{
         return SugarRecord.find(Forcast::class.java, "location = ?", "$id")
     }
+    fun getForcastsForLastFetch() : List<Forcast>{
+        return SugarRecord.find(Forcast::class.java, "location = ? and id < ?", "$id","8")
+    }
 
 }
