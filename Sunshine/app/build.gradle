@@ -3,17 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 buildscript
-{
-    ext.kotlin_version = '1.0.3'
-    repositories
-    {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
-    }
-}
+        {
+            ext.kotlin_version = '1.0.3'
+            repositories
+                    {
+                        jcenter()
+                    }
+            dependencies {
+                classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+                classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+            }
+        }
 
 android {
     compileSdkVersion 24

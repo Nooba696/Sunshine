@@ -13,10 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="DATABASE" android:value="sunshine_database.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.genericapp.extnds.sunshine.Models.SugarORM" />
+        <meta-data
+            android:name="DATABASE"
+            android:value="sunshine_database.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.genericapp.extnds.sunshine.Models.SugarORM" />
 
         <activity android:name=".Ui.MainActivity">
             <intent-filter>
@@ -25,10 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"
-            android:parentActivityName=".Ui.MainActivity"/>
-        <activity android:name=".Settings.SettingsActivity"
-            android:parentActivityName=".Ui.MainActivity"/>
+        <activity
+            android:name=".Ui.DetailsActivity"
+            android:parentActivityName=".Ui.MainActivity" />
+        <activity
+            android:name=".Settings.SettingsActivity"
+            android:parentActivityName=".Ui.MainActivity" />
     </application>
 
 </manifest>

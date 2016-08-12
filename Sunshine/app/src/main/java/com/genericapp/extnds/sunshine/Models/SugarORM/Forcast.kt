@@ -6,9 +6,9 @@ import com.orm.SugarRecord
  * Created by Nooba(PratickRoy) on 08-08-2016.
  */
 
-class Forcast : SugarRecord(){
+class Forcast : SugarRecord() {
 
-    var location : Location? = null
+    var location: Location? = null
 
     var weatherContdId: Long? = null
     var minTemp: Float? = null

@@ -8,15 +8,23 @@ import com.orm.SugarRecord
 
 class Location() : SugarRecord() {
 
-    var name : String? = null
-    var lat : Float? = null
-    var lon : Float? = null
+    var name: String? = null
+    var lat: Float? = null
+    var lon: Float? = null
 
-    fun getForcasts() : List<Forcast>{
+    fun getForcasts(): List<Forcast> {
         return SugarRecord.find(Forcast::class.java, "location = ?", "$id")
     }
-    fun getForcastsForLastFetch() : List<Forcast>{
-        return SugarRecord.find(Forcast::class.java, "location = ? and id < ?", "$id","8")
+
+    fun getForcastsForLastFetch(): List<Forcast> {
+        return SugarRecord.find(Forcast::class.java, "location = ? and id < ?", "$id", "8")
+    }
+
+    fun getLastForcast(): Forcast? {
+        val dbForcast = SugarRecord.find(Forcast::class.java, "location = ? and id = ?", "$id", "1")
+        if (!dbForcast.isEmpty())
+            return dbForcast[0]
+        return null
     }
 
 }

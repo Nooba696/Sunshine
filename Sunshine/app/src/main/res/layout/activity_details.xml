@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsActivity">
+    tools:context=".Ui.DetailsActivity">
 
-    <include layout="@layout/action_bar"
-        android:id="@+id/action_bar_layout"/>
+    <include
+        android:id="@+id/action_bar_layout"
+        layout="@layout/action_bar" />
 
-    <include layout="@layout/list_item"
+    <include
         android:id="@+id/list_item_layout"
-        android:layout_below="@id/action_bar_layout"
+        layout="@layout/list_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_below="@id/action_bar_layout" />
 </RelativeLayout>

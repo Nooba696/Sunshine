@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ListItemStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/ListItemStyle">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/day"
+        style="@style/ListItemStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/ListItemStyle"
-        android:text="Today"/>
+        android:text="Today" />
 
     <TextView
         android:id="@+id/weather_type"
+        style="@style/ListItemStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/ListItemStyle"
-        android:layout_toRightOf="@+id/day"
         android:layout_toEndOf="@+id/day"
-        android:text="Sunny"/>
+        android:layout_toRightOf="@+id/day"
+        android:text="Sunny" />
 
     <TextView
         android:id="@+id/temperature"
+        style="@style/ListItemStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/ListItemStyle"
-        android:layout_toRightOf="@+id/weather_type"
         android:layout_toEndOf="@+id/weather_type"
-        android:text="83/77"/>
-
+        android:layout_toRightOf="@+id/weather_type"
+        android:text="83/77" />
 
 
 </RelativeLayout>
