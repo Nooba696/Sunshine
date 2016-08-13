@@ -20,9 +20,9 @@ class DetailsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        day.text = intent.getStringExtra(WeatherListAdapter.DAY_TAG)
-        weather_type.text = intent.getStringExtra(WeatherListAdapter.WEATHER_TAG)
-        temperature.text = intent.getStringExtra(WeatherListAdapter.TEMPERATURE_TAG)
+        //day.text = intent.getStringExtra(WeatherListAdapter.DAY_TAG)
+        //weather_type.text = intent.getStringExtra(WeatherListAdapter.WEATHER_TAG)
+        //temperature.text = intent.getStringExtra(WeatherListAdapter.TEMPERATURE_TAG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -37,7 +37,7 @@ class DetailsActivity : AppCompatActivity() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "${day.text} ${weather_type.text} ${temperature.text} #Sunshine")
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, "${day.text} ${weather_type.text} ${temperature.text} #Sunshine")
         return shareIntent
     }
 

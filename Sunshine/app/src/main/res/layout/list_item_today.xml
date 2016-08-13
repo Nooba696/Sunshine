@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ListItemStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/day_month_date_text_view"
+        android:text="@string/day_month_date_text_view_ph_text"
+        android:gravity="center"
+        app:layout_widthPercent="48%"
+        app:layout_heightPercent="@fraction/list_item_text_views_height"
+        app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
+        app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/max_temp_today_text_view"
+        android:text="@string/max_temp_text_view_ph_text"
+        app:layout_heightPercent="@fraction/list_item_text_views_height"
+        android:gravity="bottom|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/day_month_date_text_view"
+        android:layout_alignLeft="@+id/day_month_date_text_view"
+        android:layout_alignStart="@+id/day_month_date_text_view"
+        android:layout_alignRight="@+id/day_month_date_text_view"
+        android:layout_alignEnd="@+id/day_month_date_text_view"
+         />
+
+    <TextView
+        android:id="@+id/min_temp_today_text_view"
+        android:text="@string/min_temp_text_view_ph_text"
+        android:gravity="top|center_horizontal"
+        app:layout_heightPercent="@fraction/list_item_max_and_mix_temp_text_view_width"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/max_temp_today_text_view"
+        android:layout_alignLeft="@+id/max_temp_today_text_view"
+        android:layout_alignStart="@+id/max_temp_today_text_view"
+        android:layout_alignRight="@+id/max_temp_today_text_view"
+        android:layout_alignEnd="@+id/max_temp_today_text_view" />
+
+    <ImageView
+        android:id="@+id/weather_type_image_view"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/weather_type_image_view_cd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/day_month_date_text_view"
+        android:layout_toEndOf="@+id/day_month_date_text_view"
+        app:layout_widthPercent="48%"
+        app:layout_heightPercent="@fraction/list_item_weather_type_image_view_height"
+        app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
+        app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
+        android:layout_alignTop="@+id/day_month_date_text_view"
+        android:layout_alignBottom="@+id/min_temp_today_text_view"/>
+
+
+</android.support.percent.PercentRelativeLayout>

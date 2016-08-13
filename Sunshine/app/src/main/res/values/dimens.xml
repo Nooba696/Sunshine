@@ -2,4 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- List Item Sub Item Dimensions -->
+    <fraction name="list_item_sub_items_margin">1%</fraction>
+
+    <fraction name="list_item_weather_type_image_view_width">15%</fraction>
+    <fraction name="list_item_weather_type_image_view_height">12%</fraction>
+
+    <fraction name="list_item_text_views_height">5%</fraction>
+
+    <fraction name="list_item_day_and_weather_type_text_view_width">74%</fraction>
+    <fraction name="list_item_max_and_mix_temp_text_view_width">7%</fraction>
 </resources>
