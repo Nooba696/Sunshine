@@ -10,7 +10,9 @@ class Forcast : SugarRecord() {
 
     var location: Location? = null
 
-    var weatherContdId: Long? = null
+    var main: String? = null
+    var iconDay: ByteArray? = null
+    var iconNight: ByteArray? = null
     var minTemp: Float? = null
     var windSpeed: Float? = null
     var humidity: Long? = null

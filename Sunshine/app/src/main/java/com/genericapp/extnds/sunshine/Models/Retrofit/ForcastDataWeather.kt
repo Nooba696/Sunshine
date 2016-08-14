@@ -5,4 +5,5 @@ package com.genericapp.extnds.sunshine.Models.Retrofit
  */
 data class ForcastDataWeather(val id: Long?) {
     val main: String? = null
+    val icon: String? = null
 }

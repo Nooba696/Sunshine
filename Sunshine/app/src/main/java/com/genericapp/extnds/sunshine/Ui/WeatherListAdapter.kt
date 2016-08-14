@@ -1,8 +1,10 @@
 package com.genericapp.extnds.sunshine.Ui
 
-import android.content.Intent
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +19,7 @@ import java.util.*
  * Created by Nooba(PratickRoy) on 29-07-2016.
  */
 
-class WeatherListAdapter(val forcastDataList: List<ForcastData>? = null, val forcastList: List<Forcast>? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherListAdapter(val context: Context, val forcastList: List<Forcast>? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val TAG = "WeatherListAdapter"
         const val DAY_TAG = "day"
@@ -28,26 +30,25 @@ class WeatherListAdapter(val forcastDataList: List<ForcastData>? = null, val for
         const val WEATHER_VIEW_TYPE_LATER = 2
     }
 
+    interface WeatherListAdapterCallback {
+        fun openDetailsFragment(forcastData: ForcastData)
+        fun openDetailsFragment(forcastId: Long?)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
 
-        if (holder is ViewHolderToday) {
+        if(forcastList==null)
+            return
 
-            if (forcastDataList != null)
-                (holder).draw(forcastDataList[position])
-            else if (forcastList != null)
-                (holder).draw(forcastList[position])
-        } else if (holder is ViewHolderLater) {
-            if (forcastDataList != null)
-                (holder).draw(forcastDataList[position])
-            else if (forcastList != null)
-                (holder).draw(forcastList[position])
-        }
+        if (holder is ViewHolderToday)
+            holder.draw(forcastList[position])
+        else if (holder is ViewHolderLater)
+            holder.draw(forcastList[position])
+
     }
 
     override fun getItemCount(): Int {
-        if (forcastDataList != null)
-            return forcastDataList.size
-        else if (forcastList != null)
+        if (forcastList != null)
             return forcastList.size
         return 0
     }
@@ -65,81 +66,53 @@ class WeatherListAdapter(val forcastDataList: List<ForcastData>? = null, val for
     }
 
     class ViewHolderToday(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun draw(forcastData: ForcastData) {
-            with(itemView)
-            {
-                val date = Date(forcastData.dt!! * 1000L)
-                day_month_date_text_view.text = context.getString(R.string.format_day_month_date,"Today","${DateFormat.format("MMMM", date)}",date.date)
-                max_temp_today_text_view.text = context.getString(R.string.format_temperature,forcastData.temp!!.max!!)
-                min_temp_today_text_view.text = context.getString(R.string.format_temperature,forcastData.temp!!.min!!)
-
-                setOnClickListener {
-                    val intent = Intent(context, DetailsActivity::class.java)
-                    //intent.putExtra(DAY_TAG, day.text.toString())
-                    //.putExtra(WEATHER_TAG, weather_type.text.toString())
-                    //intent.putExtra(TEMPERATURE_TAG, temperature.text.toString())
-                    context.startActivity(intent)
-                }
-            }
-        }
 
         fun draw(forcast: Forcast) {
             with(itemView)
             {
                 val date = Date(forcast.date!! * 1000L)
-                if(Date(System.currentTimeMillis()).date + 1 == date.date)
-                    day_month_date_text_view.text = context.getString(R.string.format_day_month_date,"Tomorrow","${DateFormat.format("MMMM", date)}",date.date)
+                val currentDate = Date(System.currentTimeMillis())
+
+                day_month_date_text_view.text = context.getString(R.string.format_day_month_date, "Today", "${DateFormat.format("MMMM", date)}", date.date)
+
+                if(currentDate.hours>6 && currentDate.hours<18)
+                    weather_type_today_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconDay, 0, forcast.iconDay!!.size))
                 else
-                    day_month_date_text_view.text = context.getString(R.string.format_day_month_date,"${DateFormat.format("EEEE", date)}","${DateFormat.format("MMMM", date)}",date.date)
-                max_temp_today_text_view.text = context.getString(R.string.format_temperature,forcast.maxTemp!!)
-                min_temp_today_text_view.text = context.getString(R.string.format_temperature,forcast.minTemp!!)
+                    weather_type_today_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconNight, 0, forcast.iconNight!!.size))
+                max_temp_today_text_view.text = context.getString(R.string.format_temperature, forcast.maxTemp!!)
+                min_temp_today_text_view.text = context.getString(R.string.format_temperature, forcast.minTemp!!)
 
                 setOnClickListener {
-                    val intent = Intent(context, DetailsActivity::class.java)
-                    //intent.putExtra(DAY_TAG, day.text.toString())
-                    //.putExtra(WEATHER_TAG, weather_type.text.toString())
-                    //intent.putExtra(TEMPERATURE_TAG, temperature.text.toString())
-                    context.startActivity(intent)
+                    (context as WeatherListAdapterCallback).openDetailsFragment(forcast.id)
                 }
             }
         }
     }
 
     class ViewHolderLater(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun draw(forcastData: ForcastData) {
-            with(itemView)
-            {
-                val date = Date(forcastData.dt!! * 1000L)
-                day_text_view.text = "${DateFormat.format("EEEE", date) as String}"
-                weather_type_text_view.text = forcastData.weather!![0].main
-                max_temp_text_view.text = context.getString(R.string.format_temperature,forcastData.temp!!.max!!)
-                min_temp_text_view.text = context.getString(R.string.format_temperature,forcastData.temp!!.min!!)
-
-                setOnClickListener {
-                    val intent = Intent(context, DetailsActivity::class.java)
-                    //intent.putExtra(DAY_TAG, day.text.toString())
-                    //intent.putExtra(WEATHER_TAG, weather_type.text.toString())
-                    //intent.putExtra(TEMPERATURE_TAG, temperature.text.toString())
-                    context.startActivity(intent)
-                }
-            }
-        }
 
         fun draw(forcast: Forcast) {
             with(itemView)
             {
                 val date = Date(forcast.date!! * 1000L)
-                day_text_view.text = "${DateFormat.format("EEEE", date) as String}"
-                weather_type_text_view.text = "${forcast.weatherContdId}"
-                max_temp_text_view.text = context.getString(R.string.format_temperature,forcast.maxTemp!!)
-                min_temp_text_view.text = context.getString(R.string.format_temperature,forcast.minTemp!!)
+                val currentDate = Date(System.currentTimeMillis())
+
+                if (currentDate.date + 1 == date.date)
+                    day_text_view.text = "Tomorrow"
+                else
+                    day_text_view.text = "${DateFormat.format("EEEE", date) as String}"
+
+                weather_type_text_view.text = "${forcast.main}"
+
+                if(currentDate.hours>6 && currentDate.hours<18)
+                    weather_type_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconDay, 0, forcast.iconDay!!.size))
+                else
+                    weather_type_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconNight, 0, forcast.iconNight!!.size))
+                max_temp_text_view.text = context.getString(R.string.format_temperature, forcast.maxTemp!!)
+                min_temp_text_view.text = context.getString(R.string.format_temperature, forcast.minTemp!!)
 
                 setOnClickListener {
-                    val intent = Intent(context, DetailsActivity::class.java)
-                    //intent.putExtra(DAY_TAG, day.text.toString())
-                    //intent.putExtra(WEATHER_TAG, weather_type.text.toString())
-                    //intent.putExtra(TEMPERATURE_TAG, temperature.text.toString())
-                    context.startActivity(intent)
+                    (context as WeatherListAdapterCallback).openDetailsFragment(forcast.id)
                 }
             }
         }

@@ -34,9 +34,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Ui.DetailsActivity"
-            android:parentActivityName=".Ui.MainActivity" />
-        <activity
             android:name=".Settings.SettingsActivity"
             android:parentActivityName=".Ui.MainActivity" />
     </application>

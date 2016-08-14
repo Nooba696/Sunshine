@@ -25,5 +25,8 @@
 
     <string name="format_day_month_date"><xliff:g id="day">%1$s</xliff:g>, <xliff:g id="month">%2$s</xliff:g> <xliff:g id="date">%3$d</xliff:g></string>
     <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
+    <string name="format_humidity">HUMIDITY: <xliff:g id="humidity">%1$d</xliff:g>%%</string>
+    <string name="format_wind">WIND: <xliff:g id="wind_speed">%1.0f</xliff:g> km/H</string>
+    <string name="format_pressure">PRESSURE: <xliff:g id="pressure">%1.0f</xliff:g> hPa</string>
 
 </resources>
