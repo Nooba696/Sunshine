@@ -36,6 +36,8 @@
         <activity
             android:name=".Settings.SettingsActivity"
             android:parentActivityName=".Ui.MainActivity" />
+        <service android:name=".Services.SunshineService"/>
+        <receiver android:name=".Services.SunshineService$AlarmReceiver" android:enabled="true"/>
     </application>
 
 </manifest>

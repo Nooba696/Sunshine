@@ -19,7 +19,7 @@ import java.util.*
  * Created by Nooba(PratickRoy) on 29-07-2016.
  */
 
-class WeatherListAdapter(val context: Context, val forcastList: List<Forcast>? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherListAdapter(val context: Context, val forcastList: List<Forcast>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val TAG = "WeatherListAdapter"
         const val DAY_TAG = "day"

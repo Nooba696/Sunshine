@@ -11,4 +11,4 @@ const val API_KEY = "dfc37d130602a32c97ec3e4cff956b0d"
 val retrofit = Retrofit.Builder()
         .baseUrl(API_URL)
         .addConverterFactory(GsonConverterFactory.create()).build()
-val apiService = retrofit.create(ApiService::class.java)
+val apiInterface = retrofit.create(ApiInterface::class.java)

@@ -12,11 +12,11 @@ class Location() : SugarRecord() {
     var lat: Float? = null
     var lon: Float? = null
 
-    fun getForcasts(): List<Forcast> {
+    fun getForcasts(): MutableList<Forcast> {
         return SugarRecord.find(Forcast::class.java, "location = ?", "$id")
     }
 
-    fun getForcastsForLastFetch(): List<Forcast> {
+    fun getForcastsForLastFetch(): MutableList<Forcast> {
         return SugarRecord.find(Forcast::class.java, "location = ? and id < ?", "$id", "8")
     }
 

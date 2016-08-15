@@ -22,9 +22,9 @@ import kotlin.properties.Delegates
  * Created by Nooba(PratickRoy) on 08-08-2016.
  */
 
-object DatabaseServices {
+object DatabaseUtils {
 
-    const val TAG = "DatabaseServices"
+    const val TAG = "DatabaseUtils"
 
     var mForcastDatabase : ForcastDatabase? = null
     fun addLocation(apiLoc: com.genericapp.extnds.sunshine.Models.Retrofit.Location?): Location {
@@ -105,19 +105,28 @@ object DatabaseServices {
         }
 
         private var listener  by Delegates.notNull<ForcastDatabaseCallback>()
-        private var listenerRet  by Delegates.notNull<ForcastDatabaseCallbackRetention>()
+        private var listenerRet  : ForcastDatabaseCallbackRetention? = null
 
         override fun doInBackground(vararg params: com.genericapp.extnds.sunshine.Models.Retrofit.Forcast): MutableList<Forcast>? {
 
             val apiForcast = params[0]
             var dbLoc = SugarRecord.findById(Location::class.java, apiForcast.city?.id)
             if (dbLoc == null) {
-                dbLoc = DatabaseServices.addLocation(apiForcast.city)
+                dbLoc = DatabaseUtils.addLocation(apiForcast.city)
+            } else {
+                val dbForcasts = dbLoc.getForcasts()
+                for(forcast in dbForcasts){
+                    Log.d(TAG,"DELETED")
+                    forcast.delete()
+                }
             }
             val dbForcasts = ArrayList<Forcast>()
-            for (forcast in apiForcast.list!!) {
+
+
+                for ((index, forcast) in apiForcast.list!!.withIndex()) {
                 val dbForcast = Forcast()
                 with(dbForcast) {
+                    id=index.toLong() +1
                     location = dbLoc
                     main = forcast.weather!![0].main
                     iconDay = context.getWeatherContdIcon(forcast.weather!![0].icon!!.substring(0, 2) + "d")
@@ -128,7 +137,7 @@ object DatabaseServices {
                     maxTemp = forcast.temp?.max
                     date = forcast.dt
                     pressure = forcast.pressure
-                    Log.d(DatabaseServices.TAG, "Forcast Data Saved with Id ${save()}")
+                    Log.d(DatabaseUtils.TAG, "Forcast Data Saved with Id ${save()}")
                 }
                 dbForcasts.add(dbForcast)
             }
@@ -139,7 +148,7 @@ object DatabaseServices {
             // your stuff
             Log.d(TAG, "Executed")
             listener.onDatabaseProperlySaved(dbForcasts)
-            listenerRet.onDatabaseProperlySaved(dbForcasts)
+            listenerRet?.onDatabaseProperlySaved(dbForcasts)
 
         }
     }
