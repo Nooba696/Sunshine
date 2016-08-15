@@ -1,82 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ListItemStyle"
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/day_month_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/day_month_date_text_view_ph_text"
         android:textColor="@color/white"
-        android:gravity="center"
-        app:layout_widthPercent="48%"
-        android:textSize="20dp"
 
-        app:layout_marginTopPercent="7%"
+        android:textSize="20dp"
         app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
         app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_marginTopPercent="7%"
+        app:layout_widthPercent="48%" />
 
     <TextView
         android:id="@+id/max_temp_today_text_view"
-        android:text="@string/max_temp_text_view_ph_text"
-        android:textSize="50dp"
-        android:textColor="@color/white"
-
-        android:gravity="bottom|center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/day_month_date_text_view"
-        android:layout_alignLeft="@+id/day_month_date_text_view"
-        android:layout_alignStart="@+id/day_month_date_text_view"
-        android:layout_alignRight="@+id/day_month_date_text_view"
         android:layout_alignEnd="@+id/day_month_date_text_view"
-         />
+
+        android:layout_alignLeft="@+id/day_month_date_text_view"
+        android:layout_alignRight="@+id/day_month_date_text_view"
+        android:layout_alignStart="@+id/day_month_date_text_view"
+        android:layout_below="@+id/day_month_date_text_view"
+        android:gravity="bottom|center_horizontal"
+        android:text="@string/max_temp_text_view_ph_text"
+        android:textColor="@color/white"
+        android:textSize="50dp" />
 
     <TextView
         android:id="@+id/min_temp_today_text_view"
-        android:text="@string/min_temp_text_view_ph_text"
-        android:textSize="35dp"
-        android:textColor="@color/white"
-        android:gravity="top|center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/max_temp_today_text_view"
+        android:layout_alignEnd="@+id/max_temp_today_text_view"
         android:layout_alignLeft="@+id/max_temp_today_text_view"
-        android:layout_alignStart="@+id/max_temp_today_text_view"
         android:layout_alignRight="@+id/max_temp_today_text_view"
-        android:layout_alignEnd="@+id/max_temp_today_text_view" />
+        android:layout_alignStart="@+id/max_temp_today_text_view"
+        android:layout_below="@+id/max_temp_today_text_view"
+        android:gravity="top|center_horizontal"
+        android:text="@string/min_temp_text_view_ph_text"
+        android:textColor="@color/white"
+        android:textSize="35dp" />
 
     <ImageView
         android:id="@+id/weather_type_today_image_view"
-        android:src="@mipmap/ic_launcher"
-        android:contentDescription="@string/weather_type_image_view_cd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/day_month_date_text_view"
         android:layout_toEndOf="@+id/day_month_date_text_view"
-        app:layout_widthPercent="48%"
+        android:layout_toRightOf="@+id/day_month_date_text_view"
+        android:contentDescription="@string/weather_type_image_view_cd"
+        android:src="@mipmap/ic_launcher"
         app:layout_heightPercent="24%"
         app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
-        app:layout_marginRightPercent="@fraction/list_item_sub_items_margin" />
+        app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
+        app:layout_widthPercent="48%" />
 
     <TextView
         android:id="@+id/weather_type_today_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weather_type_today_image_view"
+        android:layout_below="@+id/weather_type_today_image_view"
+        android:gravity="center"
         android:text="@string/weather_type_text_view_ph_text"
         android:textColor="@color/white"
-        android:gravity="center"
-        app:layout_widthPercent="48%"
         android:textSize="30dp"
         app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
         app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/weather_type_today_image_view"
-        android:layout_alignLeft="@+id/weather_type_today_image_view"/>
+        app:layout_widthPercent="48%" />
 
 
 </android.support.percent.PercentRelativeLayout>

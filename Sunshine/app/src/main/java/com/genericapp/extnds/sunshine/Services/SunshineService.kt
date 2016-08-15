@@ -3,23 +3,17 @@ package com.genericapp.extnds.sunshine.Services
 import android.app.IntentService
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import android.support.v7.app.NotificationCompat
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import com.genericapp.extnds.sunshine.Models.Retrofit.Forcast
 import com.genericapp.extnds.sunshine.R
 import com.genericapp.extnds.sunshine.Ui.MainActivity
-import com.genericapp.extnds.sunshine.Ui.MainFragment
-import com.genericapp.extnds.sunshine.Ui.WeatherListAdapter
 import com.genericapp.extnds.sunshine.Utils.API.apiInterface
 import com.genericapp.extnds.sunshine.Utils.Database.DatabaseUtils
-import kotlinx.android.synthetic.main.fragment_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +25,7 @@ import java.util.*
 
 class SunshineService() : IntentService(SERVICE_NAME) {
 
-    companion object{
+    companion object {
         const val TAG = "SunshineService"
         const val SERVICE_NAME = "Sunshine"
 
@@ -48,9 +42,8 @@ class SunshineService() : IntentService(SERVICE_NAME) {
             override fun onResponse(call: Call<Forcast>, response: Response<Forcast>) {
 
                 if (response.isSuccessful) {
-                    DatabaseUtils.ForcastDatabase(this@SunshineService).addForcasts(response.body(),object : DatabaseUtils.ForcastDatabase.ForcastDatabaseCallback{
-                        override fun onDatabaseProperlySaved(dbForcasts: MutableList<com.genericapp.extnds.sunshine.Models.SugarORM.Forcast>?)
-                        {
+                    DatabaseUtils.ForcastDatabase(this@SunshineService).addForcasts(response.body(), object : DatabaseUtils.ForcastDatabase.ForcastDatabaseCallback {
+                        override fun onDatabaseProperlySaved(dbForcasts: MutableList<com.genericapp.extnds.sunshine.Models.SugarORM.Forcast>?) {
                             val mBuilder = NotificationCompat.Builder(this@SunshineService)
                                     .setSmallIcon(R.mipmap.ic_launcher)
                                     .setContentTitle("Sunshine")
@@ -78,12 +71,12 @@ class SunshineService() : IntentService(SERVICE_NAME) {
         })
     }
 
-    class AlarmReceiver() : BroadcastReceiver(){
+    class AlarmReceiver() : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
-            Log.d(DatabaseUtils.TAG,"${Date(System.currentTimeMillis()).minutes}")
-            val intent = Intent(p0,SunshineService::class.java)
-            intent.putExtra(SunshineService.CITY_NAME_KEY,p1!!.getStringExtra(CITY_NAME_KEY))
-            intent.putExtra(SunshineService.UNITS_KEY,p1.getStringExtra(CITY_NAME_KEY))
+            Log.d(DatabaseUtils.TAG, "${Date(System.currentTimeMillis()).minutes}")
+            val intent = Intent(p0, SunshineService::class.java)
+            intent.putExtra(SunshineService.CITY_NAME_KEY, p1!!.getStringExtra(CITY_NAME_KEY))
+            intent.putExtra(SunshineService.UNITS_KEY, p1.getStringExtra(CITY_NAME_KEY))
             p0?.startService(intent)
         }
 

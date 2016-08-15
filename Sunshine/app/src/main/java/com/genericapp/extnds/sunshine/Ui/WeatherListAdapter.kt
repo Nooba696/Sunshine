@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class WeatherListAdapter(val context: Context, val forcastList: List<Forcast>?) 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
 
-        if(forcastList==null)
+        if (forcastList == null)
             return
 
         if (holder is ViewHolderToday)
@@ -75,7 +74,7 @@ class WeatherListAdapter(val context: Context, val forcastList: List<Forcast>?) 
 
                 day_month_date_text_view.text = context.getString(R.string.format_day_month_date, "Today", "${DateFormat.format("MMMM", date)}", date.date)
 
-                if(currentDate.hours>6 && currentDate.hours<18)
+                if (currentDate.hours > 6 && currentDate.hours < 18)
                     weather_type_today_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconDay, 0, forcast.iconDay!!.size))
                 else
                     weather_type_today_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconNight, 0, forcast.iconNight!!.size))
@@ -104,7 +103,7 @@ class WeatherListAdapter(val context: Context, val forcastList: List<Forcast>?) 
 
                 weather_type_text_view.text = "${forcast.main}"
 
-                if(currentDate.hours>6 && currentDate.hours<18)
+                if (currentDate.hours > 6 && currentDate.hours < 18)
                     weather_type_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconDay, 0, forcast.iconDay!!.size))
                 else
                     weather_type_image_view.setImageBitmap(BitmapFactory.decodeByteArray(forcast.iconNight, 0, forcast.iconNight!!.size))

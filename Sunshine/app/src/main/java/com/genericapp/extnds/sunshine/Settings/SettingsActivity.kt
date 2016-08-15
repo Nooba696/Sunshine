@@ -14,6 +14,7 @@ class SettingsActivity() : AppCompatActivity(), SettingsFragment.SettingsFragmen
     companion object {
         const val HAS_PREFS_CHANGED_KEY = "hasPrefsChanged"
     }
+
     var hasPrefsChanged = false
     override fun onPrefsChanged() {
         hasPrefsChanged = true
@@ -26,7 +27,7 @@ class SettingsActivity() : AppCompatActivity(), SettingsFragment.SettingsFragmen
 
     override fun onBackPressed() {
         val intent = Intent()
-        intent.putExtra(HAS_PREFS_CHANGED_KEY,hasPrefsChanged)
+        intent.putExtra(HAS_PREFS_CHANGED_KEY, hasPrefsChanged)
         setResult(RESULT_OK, intent)
         finish()
     }

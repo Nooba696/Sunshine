@@ -1,5 +1,6 @@
 package com.genericapp.extnds.sunshine.Ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.genericapp.extnds.sunshine.Models.Retrofit.ForcastData
@@ -13,8 +14,8 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.WeatherListAdapterC
 
     override fun openDetailsFragment(forcastId: Long?) {
 
-        var activeFragmentResourceID : Int
-        if(resources.getBoolean(R.bool.has_two_panes))
+        val activeFragmentResourceID: Int
+        if (resources.getBoolean(R.bool.has_two_panes))
             activeFragmentResourceID = R.id.detail_fragment
         else
             activeFragmentResourceID = R.id.main_fragment
@@ -37,7 +38,9 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.WeatherListAdapterC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(action_bar)
-        initUi()
+        if(savedInstanceState==null) {
+            initUi()
+        }
 
     }
 
@@ -47,12 +50,14 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.WeatherListAdapterC
         ft.replace(R.id.main_fragment, supportFragmentManager.findFragmentByTag(MainFragment.TAG) as MainFragment? ?: MainFragment())
         ft.addToBackStack(MainFragment.TAG)
         ft.commit()
-        if(resources.getBoolean(R.bool.has_two_panes) && SugarRecord.findById(Forcast::class.java, 1)!=null){
+        if (resources.getBoolean(R.bool.has_two_panes) && SugarRecord.findById(Forcast::class.java, 1) != null) {
 
             openDetailsFragment(1)
         }
 
     }
+
+
 
 
 }

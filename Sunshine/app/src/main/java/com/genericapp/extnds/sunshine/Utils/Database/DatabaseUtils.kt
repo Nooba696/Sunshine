@@ -5,16 +5,11 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import com.genericapp.extnds.sunshine.Models.SugarORM.Forcast
 import com.genericapp.extnds.sunshine.Models.SugarORM.Location
 import com.genericapp.extnds.sunshine.Ui.MainActivity
-import com.genericapp.extnds.sunshine.Ui.MainFragment
-import com.genericapp.extnds.sunshine.Ui.WeatherListAdapter
 import com.genericapp.extnds.sunshine.Utils.getWeatherContdIcon
 import com.orm.SugarRecord
-import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -26,7 +21,7 @@ object DatabaseUtils {
 
     const val TAG = "DatabaseUtils"
 
-    var mForcastDatabase : ForcastDatabase? = null
+    var mForcastDatabase: ForcastDatabase? = null
     fun addLocation(apiLoc: com.genericapp.extnds.sunshine.Models.Retrofit.Location?): Location {
 
         val dbLoc = Location()
@@ -47,37 +42,36 @@ object DatabaseUtils {
 
         companion object {
             const val TAG = "RetentionedDatabaseServices"
-            fun getRetentionedFragmentInstance(activity: MainActivity?, fragmentResourceID: Int) : RetentionedDatabaseServices {
+            fun getRetentionedFragmentInstance(activity: MainActivity?, fragmentResourceID: Int): RetentionedDatabaseServices {
                 var df = activity?.supportFragmentManager?.findFragmentByTag(RetentionedDatabaseServices.TAG) as RetentionedDatabaseServices?
-                if(df==null)
-                {
+                if (df == null) {
                     df = RetentionedDatabaseServices()
                     val ft = activity?.supportFragmentManager?.beginTransaction()
-                    ft?.add(df,TAG)
+                    ft?.add(df, TAG)
                     ft?.addToBackStack(RetentionedDatabaseServices.TAG)
                     ft?.commit()
                 }
                 return df
             }
         }
-        var dbForcasts : MutableList<Forcast>? = null
+
+        var dbForcasts: MutableList<Forcast>? = null
         override fun onCreate(savedInstanceState: Bundle?) {
-            Log.d(TAG,"called")
+            Log.d(TAG, "called")
             super.onCreate(savedInstanceState)
             setRetainInstance(true)
         }
 
-        fun addForcasts(context : Context?,apiForcast: com.genericapp.extnds.sunshine.Models.Retrofit.Forcast, forcastDatabaseCallback: ForcastDatabase.ForcastDatabaseCallback) {
-            Log.d(TAG,"${dbForcasts}")
-            if(mForcastDatabase == null && context != null) {
-                mForcastDatabase= ForcastDatabase(context)
-                ForcastDatabase(context).addForcastsWithRetention(apiForcast, forcastDatabaseCallback,object : ForcastDatabase.ForcastDatabaseCallbackRetention{
+        fun addForcasts(context: Context?, apiForcast: com.genericapp.extnds.sunshine.Models.Retrofit.Forcast, forcastDatabaseCallback: ForcastDatabase.ForcastDatabaseCallback) {
+            Log.d(TAG, "${dbForcasts}")
+            if (mForcastDatabase == null && context != null) {
+                mForcastDatabase = ForcastDatabase(context)
+                ForcastDatabase(context).addForcastsWithRetention(apiForcast, forcastDatabaseCallback, object : ForcastDatabase.ForcastDatabaseCallbackRetention {
                     override fun onDatabaseProperlySaved(dbForcasts: MutableList<com.genericapp.extnds.sunshine.Models.SugarORM.Forcast>?) {
                         this@RetentionedDatabaseServices.dbForcasts = dbForcasts
                     }
                 })
-            }
-            else
+            } else
                 forcastDatabaseCallback.onDatabaseProperlySaved(dbForcasts)
         }
     }
@@ -87,6 +81,7 @@ object DatabaseUtils {
         interface ForcastDatabaseCallback {
             fun onDatabaseProperlySaved(dbForcasts: MutableList<Forcast>?)
         }
+
         interface ForcastDatabaseCallbackRetention {
             fun onDatabaseProperlySaved(dbForcasts: MutableList<Forcast>?)
         }
@@ -105,7 +100,7 @@ object DatabaseUtils {
         }
 
         private var listener  by Delegates.notNull<ForcastDatabaseCallback>()
-        private var listenerRet  : ForcastDatabaseCallbackRetention? = null
+        private var listenerRet: ForcastDatabaseCallbackRetention? = null
 
         override fun doInBackground(vararg params: com.genericapp.extnds.sunshine.Models.Retrofit.Forcast): MutableList<Forcast>? {
 
@@ -115,18 +110,18 @@ object DatabaseUtils {
                 dbLoc = DatabaseUtils.addLocation(apiForcast.city)
             } else {
                 val dbForcasts = dbLoc.getForcasts()
-                for(forcast in dbForcasts){
-                    Log.d(TAG,"DELETED")
+                for (forcast in dbForcasts) {
+                    Log.d(TAG, "DELETED")
                     forcast.delete()
                 }
             }
             val dbForcasts = ArrayList<Forcast>()
 
 
-                for ((index, forcast) in apiForcast.list!!.withIndex()) {
+            for ((index, forcast) in apiForcast.list!!.withIndex()) {
                 val dbForcast = Forcast()
                 with(dbForcast) {
-                    id=index.toLong() +1
+                    id = index.toLong() + 1
                     location = dbLoc
                     main = forcast.weather!![0].main
                     iconDay = context.getWeatherContdIcon(forcast.weather!![0].icon!!.substring(0, 2) + "d")

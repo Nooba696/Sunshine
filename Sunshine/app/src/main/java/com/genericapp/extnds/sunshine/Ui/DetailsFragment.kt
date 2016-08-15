@@ -1,6 +1,7 @@
 package com.genericapp.extnds.sunshine.Ui
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -48,8 +49,8 @@ class DetailsFragment() : Fragment() {
         }
 
         dbForcast = SugarRecord.findById(Forcast::class.java, arguments.getLong(Argument.FORCAST_DATA_ID.key))
-
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_details, container, false)
@@ -70,16 +71,16 @@ class DetailsFragment() : Fragment() {
         mShareActionProvider.setShareIntent(createShareIntent())
     }
 
-    private fun initUi(){
+    private fun initUi() {
         val date = Date(dbForcast.date!! * 1000L)
         val currentDate = Date(System.currentTimeMillis())
-        if(date.date==currentDate.date)
-            day_text_view.text= "Today"
-        else if(date.date==currentDate.date)
-            day_text_view.text= "Tomorrow"
+        if (date.date == currentDate.date)
+            day_text_view.text = "Today"
+        else if (date.date == currentDate.date)
+            day_text_view.text = "Tomorrow"
         else
-            day_text_view.text= "${DateFormat.format("EEEE", date)}"
-        if(currentDate.hours>6 && currentDate.hours<18)
+            day_text_view.text = "${DateFormat.format("EEEE", date)}"
+        if (currentDate.hours > 6 && currentDate.hours < 18)
             weather_type_details_image_view.setImageBitmap(BitmapFactory.decodeByteArray(dbForcast.iconDay, 0, dbForcast.iconDay!!.size))
         else
             weather_type_details_image_view.setImageBitmap(BitmapFactory.decodeByteArray(dbForcast.iconNight, 0, dbForcast.iconNight!!.size))
@@ -88,10 +89,11 @@ class DetailsFragment() : Fragment() {
         max_temp_details_text_view.text = context.getString(R.string.format_temperature, dbForcast.maxTemp!!)
         min_temp_details_text_view.text = context.getString(R.string.format_temperature, dbForcast.minTemp!!)
         weather_type_text_view.text = "${dbForcast.main}"
-        humidity_text_view.text = context.getString(R.string.format_humidity,dbForcast.humidity)
-        wind_text_view.text = context.getString(R.string.format_wind,dbForcast.windSpeed)
-        pressure_text_view.text = context.getString(R.string.format_pressure,dbForcast.pressure)
+        humidity_text_view.text = context.getString(R.string.format_humidity, dbForcast.humidity)
+        wind_text_view.text = context.getString(R.string.format_wind, dbForcast.windSpeed)
+        pressure_text_view.text = context.getString(R.string.format_pressure, dbForcast.pressure)
     }
+
     private fun createShareIntent(): Intent {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)

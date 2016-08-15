@@ -77,7 +77,7 @@ class MainFragment() : Fragment() {
             }
             R.id.settings -> {
 
-                startActivityForResult(Intent(context, SettingsActivity::class.java),REQUEST_APP_PREFERENCE)
+                startActivityForResult(Intent(context, SettingsActivity::class.java), REQUEST_APP_PREFERENCE)
                 return true
             }
             R.id.map -> {
@@ -109,8 +109,8 @@ class MainFragment() : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_APP_PREFERENCE) {
             if (resultCode == AppCompatActivity.RESULT_OK) {
-                val hasPrefsChanged = data.getBooleanExtra(SettingsActivity.HAS_PREFS_CHANGED_KEY,false)
-                if(hasPrefsChanged){
+                val hasPrefsChanged = data.getBooleanExtra(SettingsActivity.HAS_PREFS_CHANGED_KEY, false)
+                if (hasPrefsChanged) {
                     getPrefs()
                     getForcast()
                 }
@@ -119,7 +119,7 @@ class MainFragment() : Fragment() {
     }
 
 
-    fun getPrefs(){
+    fun getPrefs() {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
 
         cityName = sharedPrefs.getString(
@@ -130,33 +130,35 @@ class MainFragment() : Fragment() {
                 resources.getString(R.string.units_preference_value))
     }
 
-    fun setUpdateWeatherDataAlarm(){
+    fun setUpdateWeatherDataAlarm() {
         val calendar = Calendar.getInstance()
 
         calendar.set(Calendar.HOUR_OF_DAY, 6)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
 
-        val alarmIntent = Intent(activity,SunshineService.AlarmReceiver::class.java)
-        alarmIntent.putExtra(SunshineService.CITY_NAME_KEY,cityName)
-        alarmIntent.putExtra(SunshineService.UNITS_KEY,units)
+        val alarmIntent = Intent(activity, SunshineService.AlarmReceiver::class.java)
+        alarmIntent.putExtra(SunshineService.CITY_NAME_KEY, cityName)
+        alarmIntent.putExtra(SunshineService.UNITS_KEY, units)
 
-        val pi = PendingIntent.getBroadcast(activity,0,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        val pi = PendingIntent.getBroadcast(activity, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val am = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        Log.d(DatabaseUtils.TAG,"${Date(System.currentTimeMillis()).minutes}")
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,AlarmManager.INTERVAL_DAY,pi)
+        Log.d(DatabaseUtils.TAG, "${Date(System.currentTimeMillis()).minutes}")
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pi)
 
     }
-    fun initializeSunshineMainWeatherList(){
+
+    fun initializeSunshineMainWeatherList() {
         sunshine_main_weather_list.adapter = null
         sunshine_main_weather_list.layoutManager = LinearLayoutManager(context)
         sunshine_main_weather_list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))
     }
+
     fun getForcast() {
 
-        if(progress_bar.visibility == View.GONE)
+        if (progress_bar.visibility == View.GONE)
             progress_bar.visibility = View.VISIBLE
-        if(sunshine_main_weather_list.adapter != null)
+        if (sunshine_main_weather_list.adapter != null)
             sunshine_main_weather_list.adapter = null
 
         if (!isFetchNecessary(cityName)) {
@@ -173,26 +175,25 @@ class MainFragment() : Fragment() {
                             getRetentionedFragmentInstance(activity as? MainActivity, R.id.main_fragment).
                             addForcasts(context, response.body(), object : DatabaseUtils.ForcastDatabase.ForcastDatabaseCallback {
 
-                        override fun onDatabaseProperlySaved(dbForcasts: MutableList<com.genericapp.extnds.sunshine.Models.SugarORM.Forcast>?) {
+                                override fun onDatabaseProperlySaved(dbForcasts: MutableList<com.genericapp.extnds.sunshine.Models.SugarORM.Forcast>?) {
 
-                            try {
-                                progress_bar.visibility = View.GONE
-                                if(dbForcasts==null){
-                                    val dbLoc = SugarRecord.find(Location::class.java, "name = ?", cityName)
-                                    sunshine_main_weather_list.adapter = WeatherListAdapter(context, dbLoc[0].getForcastsForLastFetch())
-                                }
-                                else
-                                    sunshine_main_weather_list.adapter = WeatherListAdapter(context, dbForcasts)
-                                Toast.makeText(context, DATA_FETCH_SUCCESSFUL_MESSAGE, Toast.LENGTH_SHORT).show()
-                                Log.d(TAG, "HERE")
-                                if (resources.getBoolean(R.bool.has_two_panes)) {
-                                    (activity as MainActivity).openDetailsFragment(1)
-                                }
-                            } catch (e: Exception) {
-                            }
+                                    try {
+                                        progress_bar.visibility = View.GONE
+                                        if (dbForcasts == null) {
+                                            val dbLoc = SugarRecord.find(Location::class.java, "name = ?", cityName)
+                                            sunshine_main_weather_list.adapter = WeatherListAdapter(context, dbLoc[0].getForcastsForLastFetch())
+                                        } else
+                                            sunshine_main_weather_list.adapter = WeatherListAdapter(context, dbForcasts)
+                                        Toast.makeText(context, DATA_FETCH_SUCCESSFUL_MESSAGE, Toast.LENGTH_SHORT).show()
+                                        Log.d(TAG, "HERE")
+                                        if (resources.getBoolean(R.bool.has_two_panes)) {
+                                            (activity as MainActivity).openDetailsFragment(1)
+                                        }
+                                    } catch (e: Exception) {
+                                    }
 
-                        }
-                    })
+                                }
+                            })
                 } else {
                     unsuccessfulFetch(cityName)
                 }

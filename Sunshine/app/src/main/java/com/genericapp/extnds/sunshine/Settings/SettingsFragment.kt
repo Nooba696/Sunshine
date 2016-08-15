@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.preference.PreferenceFragment
 import android.util.Log
 import com.genericapp.extnds.sunshine.R
-import com.genericapp.extnds.sunshine.Ui.MainActivity
 
 /**
  * Created by Nooba(PratickRoy) on 30-07-2016.
@@ -13,14 +12,16 @@ import com.genericapp.extnds.sunshine.Ui.MainActivity
 
 class SettingsFragment() : PreferenceFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
-    companion object{
+    companion object {
         const val TAG = "SettingsFragment"
     }
-    interface SettingsFragmentCallback{
+
+    interface SettingsFragmentCallback {
         fun onPrefsChanged()
     }
+
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
-        Log.d(TAG,"CHANGED")
+        Log.d(TAG, "CHANGED")
         (activity as SettingsFragmentCallback).onPrefsChanged()
     }
 

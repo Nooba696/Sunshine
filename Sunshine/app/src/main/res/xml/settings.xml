@@ -4,22 +4,22 @@
     <PreferenceCategory android:title="Location">
 
         <EditTextPreference
-            android:title="City Name"
-            android:key="location_preference"
             android:defaultValue="Kolkata"
             android:inputType="text"
-            android:singleLine="true"/>
+            android:key="location_preference"
+            android:singleLine="true"
+            android:title="City Name" />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Temperature">
 
         <ListPreference
-            android:key="units_preference"
-            android:title="Units"
             android:defaultValue="metric"
             android:entries="@array/unit_list_entries"
-            android:entryValues="@array/unit_list_values" />/>
+            android:entryValues="@array/unit_list_values"
+            android:key="units_preference"
+            android:title="Units" />/>
 
     </PreferenceCategory>
 
