@@ -18,6 +18,7 @@
     <TextView
         android:id="@+id/day_text_view"
         android:text="@string/day_text_view_ph_text"
+        android:textSize="20dp"
         app:layout_heightPercent="@fraction/list_item_text_views_height"
         app:layout_widthPercent="@fraction/list_item_day_and_weather_type_text_view_width"
         android:gravity="bottom"
@@ -49,8 +50,9 @@
     <TextView
         android:id="@+id/max_temp_text_view"
         android:text="@string/max_temp_text_view_ph_text"
+        android:textSize="20dp"
         app:layout_heightPercent="@fraction/list_item_text_views_height"
-        app:layout_widthPercent="@fraction/list_item_max_and_mix_temp_text_view_width"
+
         android:gravity="bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

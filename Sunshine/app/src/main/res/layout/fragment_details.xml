@@ -8,10 +8,10 @@
     <TextView
         android:id="@+id/day_text_view"
         android:text="Today"
+        android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_widthPercent="48%"
-        app:layout_heightPercent="@fraction/list_item_text_views_height"
         app:layout_marginTopPercent="7%"
         app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
         app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"/>
@@ -19,6 +19,7 @@
     <TextView
         android:id="@+id/month_date_text_view"
         android:text="June 23"
+        android:textSize="20dp"
         android:layout_below="@+id/day_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +31,8 @@
     <TextView
         android:id="@+id/max_temp_details_text_view"
         android:text="21"
-        android:gravity="bottom"
+        android:textSize="50dp"
+        android:gravity="center_horizontal|bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/month_date_text_view"
@@ -42,8 +44,8 @@
     <TextView
         android:id="@+id/min_temp_details_text_view"
         android:text="8"
-        android:gravity="top"
-        app:layout_heightPercent="@fraction/list_item_max_and_mix_temp_text_view_width"
+        android:textSize="35dp"
+        android:gravity="center_horizontal|top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/max_temp_details_text_view"
@@ -70,7 +72,7 @@
         android:text="Clear"
         android:gravity="center"
         app:layout_widthPercent="48%"
-        app:layout_heightPercent="@fraction/list_item_text_views_height"
+        android:textSize="25dp"
         app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
         app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
         android:layout_width="wrap_content"
@@ -85,22 +87,23 @@
         android:layout_below="@+id/weather_type_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_widthPercent="48%"
-        app:layout_heightPercent="@fraction/list_item_text_views_height"/>
+
+        android:textSize="20dp"/>
     <TextView
         android:id="@+id/wind_text_view"
         android:text="WIND: 6 km/H NW"
         android:layout_below="@+id/humidity_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_widthPercent="48%"
-        app:layout_heightPercent="@fraction/list_item_text_views_height"/>
+
+        android:textSize="20dp"/>
+
     <TextView
         android:id="@+id/pressure_text_view"
         android:text="PRESSURE: 1014 hPa"
         android:layout_below="@+id/wind_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_widthPercent="48%"
-        app:layout_heightPercent="@fraction/list_item_text_views_height"/>
+
+        android:textSize="20dp"/>
 </android.support.percent.PercentRelativeLayout>

@@ -10,6 +10,6 @@
 
     <fraction name="list_item_text_views_height">5%</fraction>
 
-    <fraction name="list_item_day_and_weather_type_text_view_width">74%</fraction>
+    <fraction name="list_item_day_and_weather_type_text_view_width">70%</fraction>
     <fraction name="list_item_max_and_mix_temp_text_view_width">7%</fraction>
 </resources>
