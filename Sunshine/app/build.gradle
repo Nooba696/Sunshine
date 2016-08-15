@@ -3,17 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 buildscript
-{
-    ext.kotlin_version = '1.0.3'
-    repositories
-    {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
-    }
-}
+        {
+            ext.kotlin_version = '1.0.3'
+            repositories
+                    {
+                        jcenter()
+                    }
+            dependencies {
+                classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+                classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+            }
+        }
 
 android {
     compileSdkVersion 24
@@ -47,6 +47,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.github.satyan:sugar:1.5'
+    compile 'com.android.support:percent:24.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 repositories {
     mavenCentral()
