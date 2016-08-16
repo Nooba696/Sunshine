@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ListItemStyle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
 
     <TextView
@@ -57,10 +57,13 @@
         android:layout_toRightOf="@+id/day_month_date_text_view"
         android:contentDescription="@string/weather_type_image_view_cd"
         android:src="@mipmap/ic_launcher"
-        app:layout_heightPercent="24%"
+
         app:layout_marginLeftPercent="@fraction/list_item_sub_items_margin"
         app:layout_marginRightPercent="@fraction/list_item_sub_items_margin"
-        app:layout_widthPercent="48%" />
+        app:layout_widthPercent="48%"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/min_temp_today_text_view"
+        />
 
     <TextView
         android:id="@+id/weather_type_today_text_view"

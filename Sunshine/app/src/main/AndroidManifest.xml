@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.genericapp.extnds.sunshine">
+    package="com.extnds.learning.sunshine">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,6 +8,7 @@
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_scheme"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -24,22 +25,31 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.genericapp.extnds.sunshine.Models.SugarORM" />
+            android:value="com.extnds.learning.sunshine.models.sugarORM" />
 
-        <activity android:name=".Ui.MainActivity">
+        <activity android:name="com.extnds.learning.sunshine.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.extnds.com"
+                    android:pathPrefix="/Sunshine"
+                    android:scheme="http" />
+                <data
+                    android:host="Sunshine"
+                    android:scheme="extnds" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Settings.SettingsActivity"
-            android:parentActivityName=".Ui.MainActivity" />
+        <activity android:name="com.extnds.learning.sunshine.settings.SettingsActivity" />
 
-        <service android:name=".Services.SunshineService" />
+        <service android:name="com.extnds.learning.sunshine.services.SunshineService" />
         <receiver
-            android:name=".Services.SunshineService$AlarmReceiver"
+            android:name="com.extnds.learning.sunshine.services.SunshineService$AlarmReceiver"
             android:enabled="true" />
     </application>
 
