@@ -29,20 +29,20 @@
 
         <activity android:name="com.extnds.learning.sunshine.ui.MainActivity">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.VIEW" />
 
+            </intent-filter>
+
+            <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="www.extnds.com"
-                    android:pathPrefix="/Sunshine"
-                    android:scheme="http" />
-                <data
-                    android:host="Sunshine"
-                    android:scheme="extnds" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:host="www.extnds.com" android:pathPrefix="/Sunshine" android:scheme="http" />
+                <data android:host="Sunshine" android:scheme="extnds" />
+
             </intent-filter>
         </activity>
         <activity android:name="com.extnds.learning.sunshine.settings.SettingsActivity" />
